@@ -1,0 +1,26 @@
+// SPDX-License-Identifier: MIT
+pragma solidity ^0.8.0;
+contract EtherStorage {
+    uint256 public storedEther;
+    // Event to notify when Ether is stored
+    event EtherStored(uint256 amount, address indexed sender);
+    // Constructor to initialize with 2.5 Ether (2.5 ether = 2.5 * 10^18 wei)
+    constructor() payable {
+        require(msg.value == 2.5 ether, "Must send exactly 2.5 ether");
+        storedEther = msg.value;
+        emit EtherStored(storedEther, msg.sender);
+    }
+    // Function to check the stored Ether
+    function getStoredEther() public view returns (uint256) {
+        return storedEther;
+    }
+    // Receive function to allow the contract to accept Ether
+    receive() external payable {
+        // Logic to handle incoming Ether
+    }
+    // Fallback function to handle calls to the contract that do not match any function
+    fallback() external payable {
+        // Logic to handle incoming Ether
+    }
+}
+```
